@@ -2,7 +2,7 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
-import { getAllStudents, getStudentById } from './services/students.js';
+import { getAllContacts, getContactById } from './services/contacts.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -30,19 +30,19 @@ export const startServer = () => {
     res.json({ message: 'Hello world' });
   });
 
-  app.get('/students', async (req, res) => {
-    const students = await getAllStudents();
+  app.get('/contacts', async (req, res) => {
+    const contacts = await getAllContacts();
 
     res.status(200).json({
-      data: students,
+      data: contacts,
     });
   });
 
-  app.get('/students/:studentId', async (req, res) => {
-    const { studentId } = req.params;
-    const student = await getStudentById(studentId);
+  app.get('/contacts/:contactId', async (req, res) => {
+    const { contactId } = req.params;
+    const contact = await getContactById(contactId);
 
-    if (!student) {
+    if (!contact) {
       res.status(404).json({
         message: 'Student not found',
       });
@@ -50,7 +50,7 @@ export const startServer = () => {
     }
 
     res.status(200).json({
-      data: student,
+      data: contact,
     });
   });
 
