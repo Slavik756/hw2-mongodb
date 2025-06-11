@@ -6,23 +6,22 @@ const contactsSchema = new Schema(
       type: String,
       required: true,
     },
-    age: {
+    phoneNumber: {
       type: Number,
       required: true,
     },
-    gender: {
+    email: {
       type: String,
-      required: true,
-      enum: ['male', 'female', 'other'],
+      default: null,
     },
-    avgMark: {
-      type: Number,
-      required: true,
-    },
-    onDuty: {
-      type: Boolean,
-      required: true,
+    isFavourite: {
+       type: Boolean,
       default: false,
+    },
+    contactType: {
+      type: String,
+      enum: ['personal', 'home', 'work'],
+      default: 'personal',
     },
   },
   {
@@ -32,3 +31,4 @@ const contactsSchema = new Schema(
 );
 
 export const ContactsCollection = model('contact', contactsSchema);
+
