@@ -1,88 +1,31 @@
 import express from 'express';
-import pino from 'pino-http';
-import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
-import { getAllContacts, getContactById } from './services/contacts.js';
+
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+
+import { corsMiddleware } from './middlewares/corsMiddleware.js';
+import { loggerMiddleware } from './middlewares/loggerMiddleware.js';
+
+import dotenv from 'dotenv';
+import routes from './routers/index.js';
+dotenv.config();
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
 export const startServer = () => {
   const app = express();
 
-  app.use((req, res, next) => {
-    console.log('');
-    console.log('A new request has come');
-    console.log(`Time: ${new Date().toLocaleString()}`);
-    next();
-  });
+  app.use(corsMiddleware);
 
-  app.use(express.json());
-
-  app.use(cors());
-
-  app.use(
-    pino({
-      transport: { target: 'pino-pretty' },
-    }),
-  );
-
-  app.get('/', (req, res) => {
-    res.json({ message: 'Hello world' });
-  });
-
-  app.get('/contacts', async (req, res) => {
-    const contacts = await getAllContacts();
-
-    res.status(200).json({
-  status: 200,
-  message: 'Successfully found contacts!',
-  data: contacts,
-    });
-  });
-
-   app.get('/contacts/:contactId', async (req, res) => {
-    const { contactId } = req.params;
-    const contact = await getContactById(contactId);
-
-    if (!contact) {
-  res.status(404).json({
-    message: 'Contact not found',
-  });
-  return;
-}
-
-res.status(200).json({
-  status: 200,
-  message: `Successfully found contact with id ${contactId}!`,
-  data: contact,
-});
-  });
+  app.use(loggerMiddleware);
 
 
-  const extraMiddleware = (req, res, next) => {
-    console.log('Extra middleware was done');
+  app.use(routes);
 
-    next();
-  };
+  app.use(notFoundHandler);
 
-  app.get(
-    '/extramiddleware',
-    [extraMiddleware, extraMiddleware, extraMiddleware],
-    (req, res) => {
-      res.json({ message: 'Controller with extra middleware' });
-    },
-  );
-
-  app.use((req, res, next) => {
-    res.status(404).json({ message: 'Not found' });
-  });
-
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  app.use(errorHandler);
 
   app.listen(PORT, (err) => {
     if (err) {
