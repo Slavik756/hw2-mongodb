@@ -16,6 +16,11 @@ const contactSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: true,
     },
+    photo: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -23,4 +28,4 @@ const contactSchema = new Schema(
   },
 );
 
-export const ContactsCollection = model('Contact', contactSchema); // collection name: contacts
+export const ContactsCollection = model('Contact', contactSchema, 'contacts'); // collection name: contacts

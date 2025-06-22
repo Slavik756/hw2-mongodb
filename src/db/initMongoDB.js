@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 import {getEnvVar} from '../utils/getEnvVar.js';
 
-export const initMongoDB = async () => {
+export const initMongoConnection = async () => {
   try {
     const user = getEnvVar('MONGODB_USER');
     const pwd = getEnvVar('MONGODB_PASSWORD');
