@@ -2,7 +2,9 @@ import { json, Router } from 'express';
 
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
+  getGoogleOAuthUrlController,
   loginUserController,
+  loginWithGoogleController,
   logoutUserController,
   refreshUserSessionController,
   registerUserController,
@@ -11,9 +13,13 @@ import {
 } from '../controllers/auth.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
-import { loginUserSchema, registerUserSchema,
+import {
+  loginUserSchema,
+  loginWithGoogleOAuthSchema,
+  registerUserSchema,
   requestResetPasswordSchema,
-  resetPasswordSchema, } from '../validation/auth.js';
+  resetPasswordSchema,
+} from '../validation/auth.js';
 import cookieParser from 'cookie-parser';
 
 const router = Router();
@@ -61,4 +67,14 @@ router.post(
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );
+
+router.get('/get-oauth-url', ctrlWrapper(getGoogleOAuthUrlController));
+
+router.post(
+  '/confirm-oauth',
+  jsonParser,
+  validateBody(loginWithGoogleOAuthSchema),
+  ctrlWrapper(loginWithGoogleController),
+);
+
 export default router;

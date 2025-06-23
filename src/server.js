@@ -1,10 +1,6 @@
 import 'dotenv/config';
-// import dotenv from 'dotenv';
-// dotenv.config();
 
 import express from 'express';
-// import cors from 'cors';
-// import pino from 'pino-http';
 import { getEnvVar } from './utils/getEnvVar.js';
 
 import { corsMiddleware } from './middlewares/corsMiddleware.js';
@@ -15,10 +11,10 @@ import routes from './routers/index.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
-// import { AVATARS_DIR } from './constants/index.js';
 import path from 'node:path';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
-const PORT = getEnvVar('PORT', 3000);
+const PORT = getEnvVar('PORT', 8080);
 
 export const startServer = () => {
   const app = express();
@@ -27,16 +23,12 @@ export const startServer = () => {
 
   app.use(loggerMiddleware);
 
-  // Тестовий маршрут
-  // app.get('/hello', (req, res) => {
-  //   req.log.info({ route: '/hello' }, `The user went to the route '/hello'`);
-  //   res.send('Привіт!');
-  // });
-
   app.use(
     '/uploads/avatars',
     express.static(path.resolve('uploads', 'avatars')),
   );
+
+  app.use('/api-docs', swaggerDocs());
 
   app.use(routes);
 

@@ -1,0 +1,9 @@
+description: Bad request error - invalid contact id
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/contacts/errors/badRequest.error.yaml
+    examples:
+      invalidContactId:
+        summary: Invalid contact id
+        $ref: ./examples/invalidContactId.contacts.example.yaml

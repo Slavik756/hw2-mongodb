@@ -1,0 +1,15 @@
+value:
+  status: 400
+  message: BadRequestError
+  data:
+    message: Body validation error
+    errors:
+      - message: \"email\" must be a valid email
+        path: ['email']
+        type: string.email
+        context:
+          value: 'qq'
+          invalids:
+            - 'qq'
+          label: email
+          key: email

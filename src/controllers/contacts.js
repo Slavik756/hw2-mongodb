@@ -4,7 +4,7 @@ import {
   createContact,
   deleteContact,
   getContactById,
-  getAllContacts,
+  getContacts,
   updateContact,
 } from '../services/contacts.js';
 
@@ -16,14 +16,14 @@ import { saveFileToUploadsAvatarsDir } from '../utils/saveFileToUploadsAvatarsDi
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
 
-export const getAllContactsController = async (req, res) => {
+export const getContactsController = async (req, res) => {
     const { page, perPage } = parsePaginationParams(req.query);
 
   const { sortBy, sortOrder } = parseSortParams(req.query);
 
   const filter = parseFilterParams(req.query);
 
-  const contacts = await getAllContacts({
+  const contacts = await getContacts({
     page,
     perPage,
     sortBy,

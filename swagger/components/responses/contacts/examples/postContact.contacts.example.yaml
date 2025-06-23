@@ -1,0 +1,14 @@
+value:
+  status: 201
+  message: Successfully created a contact!
+  data:
+    name: 'Tokio_Touka'
+    phoneNumber: '+380951000993'
+    email: 'touka@gmail.com'
+    isFavourite: true
+    contactType: 'personal'
+    userId: '684f6e85a81f97b9fa6c65e9'
+    photo: 'https://res.cloudinary.com/dz38jybtu/image/upload/v1750369802/projects/node-js-mongodb/contacts/avatars/blonde-blue-eye_1920x1080_1750369801009-465321042.jpg'
+    _id: '6854860a9262ba2385e66694'
+    createdAt: '2025-06-19T21:50:02.672Z'
+    updatedAt: '2025-06-19T21:50:02.672Z'

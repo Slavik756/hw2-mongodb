@@ -1,0 +1,9 @@
+value:
+  status: 201
+  message: 'Successfully registered user!'
+  data:
+    name: 'Nick Fury'
+    email: 'nickfury@mail.com'
+    _id: 6853f991e983d0f76f8a4e22
+    createdAt: '2025-06-19T11:50:41.851Z'
+    updatedAt: '2025-06-19T11:50:41.851Z'

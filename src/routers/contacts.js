@@ -5,7 +5,7 @@ import {
   createContactController,
   deleteContactController,
   getContactByIdController,
-  getAllContactsController,
+  getContactsController,
   patchContactController,
   upsertContactController,
 } from '../controllers/contacts.js';
@@ -28,7 +28,7 @@ const jsonParser = json();
 
 // router.use(authenticate);
 
-router.get('/', ctrlWrapper(getAllContactsController));
+router.get('/', ctrlWrapper(getContactsController));
 
 router.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 

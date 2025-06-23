@@ -23,6 +23,11 @@ import jwt from 'jsonwebtoken';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { sendMail } from '../utils/sendMail.js';
 
+import {
+  getFullNameFromGoogleTokenPayload,
+  validateCode,
+} from '../utils/googleOAuth2.js';
+
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
   if (user !== null) {
@@ -64,6 +69,7 @@ export const loginUser = async (payload) => {
   await SessionsCollection.deleteOne({ userId: user._id });
 
   const newSession = createSession();
+
 
   return await SessionsCollection.create({
     userId: user._id,
@@ -139,34 +145,31 @@ export const requestResetPassword = async (email) => {
   });
 
   try {
-  await sendMail({
-    from: getEnvVar(SMTP.SMTP_FROM),
-    to: email,
-    subject: 'Reset your password',
-    html,
-  });
-} catch (error) {
-  console.error('Error sending reset password email:', error); // <-- додай це
-  throw createHttpError(
-    500,
-    'Failed to send the email, please try again later.',
-  );
-}
-
+    await sendMail({
+      from: getEnvVar(SMTP.SMTP_FROM),
+      to: email,
+      subject: 'Reset your password',
+      html,
+    });
+  } catch {
+    throw createHttpError(
+      500,
+      'Failed to send the email, please try again later.',
+    );
+  }
 };
 
 export const resetPassword = async (password, token) => {
   try {
     const decoded = jwt.verify(token, getEnvVar('JWT_SECRET'));
 
-    const user = await UsersCollection.findOne({ _id: decoded.sub });
+   const user = await UsersCollection.findOne({ _id: decoded.sub });
 
     if (user === null) {
       throw createHttpError(404, 'User not found!');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
 
     await UsersCollection.findOneAndUpdate(
       { _id: user._id },
@@ -184,4 +187,30 @@ export const resetPassword = async (password, token) => {
 
     throw error;
   }
+};
+
+
+export const loginOrSignupWithGoogle = async (code) => {
+  const loginTicket = await validateCode(code);
+  const payload = loginTicket.getPayload();
+  if (!payload) throw createHttpError(401);
+
+  let user = await UsersCollection.findOne({ email: payload.email });
+  if (!user) {
+    const password = await bcrypt.hash(randomBytes(10), 10);
+    user = await UsersCollection.create({
+      name: getFullNameFromGoogleTokenPayload(payload),
+      email: payload.email,
+      password,
+    });
+  }
+
+  await SessionsCollection.deleteOne({ _id: user._id });
+
+  const newSession = createSession();
+
+  return await SessionsCollection.create({
+    userId: user._id,
+    ...newSession,
+  });
 };
