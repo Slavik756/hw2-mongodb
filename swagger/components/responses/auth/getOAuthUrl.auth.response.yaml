@@ -1,0 +1,8 @@
+description: Get google oauth url
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/auth/success/getOAuthUrl.success.yaml
+    examples:
+      getOauthUrl:
+        $ref: ./examples/getOAuthUrl.auth.example.yaml

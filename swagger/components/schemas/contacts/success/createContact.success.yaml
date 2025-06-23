@@ -1,0 +1,16 @@
+type: object
+required:
+  - status
+  - message
+  - data
+  - isNew
+properties:
+  status:
+    type: integer
+  message:
+    type: string
+  isNew:
+    type: boolean
+  data:
+    type: object
+    $ref: ../contact.schema.yaml

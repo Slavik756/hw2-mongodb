@@ -1,0 +1,5 @@
+value:
+  status: 200
+  message: Successfully logged in via Google OAuth!
+  data:
+    accessToken: OpSua0ZYR/AxFbFWxygw28/3zIZDWHZvyG9KAx1k

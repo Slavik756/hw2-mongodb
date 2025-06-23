@@ -1,0 +1,8 @@
+in: query
+name: contactType
+schema:
+  type: string
+  enum: ['work', 'home', 'personal']
+  example: 'home'
+
+required: false
