@@ -1,9 +1,0 @@
-description: Bad request error - body validation error
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/contacts/errors/badRequest.error.yaml
-    examples:
-      bodyValidationError:
-        summary: Body validation error
-        $ref: ./examples/bodyValidationError.contacts.example.yaml

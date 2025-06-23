@@ -1,8 +1,0 @@
-description: Conflict error
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/errors/conflict.error.yaml
-    examples:
-      emailInUse:
-        $ref: ./examples/emailInUse.auth.example.yaml

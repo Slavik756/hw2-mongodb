@@ -1,46 +1,94 @@
-import 'dotenv/config';
-
 import express from 'express';
+import pino from 'pino-http';
+import cors from 'cors';
 import { getEnvVar } from './utils/getEnvVar.js';
+import { getAllContacts, getContactById } from './services/contacts.js';
 
-import { corsMiddleware } from './middlewares/corsMiddleware.js';
-import { loggerMiddleware } from './middlewares/loggerMiddleware.js';
-
-import routes from './routers/index.js';
-
-import { notFoundHandler } from './middlewares/notFoundHandler.js';
-import { errorHandler } from './middlewares/errorHandler.js';
-
-import path from 'node:path';
-import { swaggerDocs } from './middlewares/swaggerDocs.js';
-
-const PORT = getEnvVar('PORT', 8080);
+const PORT = Number(getEnvVar('PORT', '3000'));
 
 export const startServer = () => {
   const app = express();
 
-  app.use(corsMiddleware);
+  app.use((req, res, next) => {
+    console.log('');
+    console.log('A new request has come');
+    console.log(`Time: ${new Date().toLocaleString()}`);
+    next();
+  });
 
-  app.use(loggerMiddleware);
+  app.use(express.json());
+
+  app.use(cors());
 
   app.use(
-    '/uploads/avatars',
-    express.static(path.resolve('uploads', 'avatars')),
+    pino({
+      transport: { target: 'pino-pretty' },
+    }),
   );
 
-  app.use('/api-docs', swaggerDocs());
+  app.get('/', (req, res) => {
+    res.json({ message: 'Hello world' });
+  });
 
-  app.use(routes);
+  app.get('/contacts', async (req, res) => {
+    const contacts = await getAllContacts();
 
-  app.use(notFoundHandler);
+    res.status(200).json({
+  status: 200,
+  message: 'Successfully found contacts!',
+  data: contacts,
+    });
+  });
 
-  app.use(errorHandler);
+   app.get('/contacts/:contactId', async (req, res) => {
+    const { contactId } = req.params;
+    const contact = await getContactById(contactId);
+
+    if (!contact) {
+  res.status(404).json({
+    message: 'Contact not found',
+  });
+  return;
+}
+
+res.status(200).json({
+  status: 200,
+  message: `Successfully found contact with id ${contactId}!`,
+  data: contact,
+});
+  });
+
+
+  const extraMiddleware = (req, res, next) => {
+    console.log('Extra middleware was done');
+
+    next();
+  };
+
+  app.get(
+    '/extramiddleware',
+    [extraMiddleware, extraMiddleware, extraMiddleware],
+    (req, res) => {
+      res.json({ message: 'Controller with extra middleware' });
+    },
+  );
+
+  app.use((req, res, next) => {
+    res.status(404).json({ message: 'Not found' });
+  });
+
+  app.use((err, req, res, next) => {
+    res.status(500).json({
+      message: 'Something went wrong',
+      error: err.message,
+    });
+  });
 
   app.listen(PORT, (err) => {
     if (err) {
       throw err;
     }
 
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port: ${PORT}`);
   });
 };

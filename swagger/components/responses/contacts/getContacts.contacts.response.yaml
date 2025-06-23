@@ -1,9 +1,0 @@
-description: Get contacts
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/contacts/success/getContacts.success.yaml
-    examples:
-      getContacts:
-        summary: Get contacts
-        $ref: ./examples/getContacts.contacts.example.yaml

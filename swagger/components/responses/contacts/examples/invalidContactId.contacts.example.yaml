@@ -1,5 +1,0 @@
-value:
-  status: 400
-  message: BadRequestError
-  data:
-    message: "Requested contact id: '684f6ec9a81f97b9fa6c65f' is not a mongoose ObjectId"

@@ -1,8 +1,0 @@
-description: User not found
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/errors/userNotFound.error.yaml
-    examples:
-      userNotFound:
-        $ref: ./examples/userNotFound.auth.example.yaml

@@ -1,8 +1,0 @@
-in: query
-name: isFavourite
-schema:
-  type: boolean
-  enum: [true, false]
-  example: true
-
-required: false

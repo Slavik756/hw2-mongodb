@@ -1,9 +1,0 @@
-type: object
-required:
-  - message
-  - error
-properties:
-  message:
-    type: string
-  error:
-    type: string

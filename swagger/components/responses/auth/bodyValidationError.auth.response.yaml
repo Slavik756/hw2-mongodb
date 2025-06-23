@@ -1,8 +1,0 @@
-description: Bad validation error
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/errors/badRequestError.error.yaml
-    examples:
-      bodyValidationError:
-        $ref: ./examples/bodyValidationError.auth.example.yaml

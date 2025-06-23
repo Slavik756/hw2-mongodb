@@ -1,7 +1,0 @@
-in: query
-name: page
-schema:
-  type: integer
-example: 1
-
-required: false

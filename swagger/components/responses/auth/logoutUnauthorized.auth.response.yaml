@@ -1,8 +1,0 @@
-description: Unauthorized - no valid access token
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/errors/logoutUnauthorized.error.yaml
-    examples:
-      logoutUnauthorized:
-        $ref: ./examples/logoutUnauthorized.auth.example.yaml
