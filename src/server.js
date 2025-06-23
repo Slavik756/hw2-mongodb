@@ -28,7 +28,7 @@ export const startServer = () => {
     express.static(path.resolve('uploads', 'avatars')),
   );
 
-  app.use('/api-docs', swaggerDocs());
+  app.use('/api-docs', ...swaggerDocs());
 
   app.use(routes);
 
