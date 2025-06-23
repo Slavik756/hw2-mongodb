@@ -80,7 +80,7 @@ export const updateContactSchema = Joi.object({
       'string.email': 'Please enter a valid email address',
     }),
 
-  isFavourite: Joi.string().messages({
+  isFavourite: Joi.boolean().messages({
     'boolean.base': 'Is favourite should be a boolean',
   }),
   contactType: Joi.string().valid('work', 'home', 'personal').messages({
