@@ -1,0 +1,9 @@
+description: Updates a contact
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/contacts/success/patchContact.success.yaml
+    examples:
+      updateContact:
+        summary: Update a contact
+        $ref: ./examples/patchContact.contacts.example.yaml

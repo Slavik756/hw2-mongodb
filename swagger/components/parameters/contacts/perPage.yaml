@@ -1,0 +1,7 @@
+in: query
+name: perPage
+schema:
+  type: integer
+  example: 10
+
+required: false

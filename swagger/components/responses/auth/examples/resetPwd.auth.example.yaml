@@ -1,0 +1,4 @@
+value:
+  status: 200
+  message: Password has been successfully reset.
+  data: {}

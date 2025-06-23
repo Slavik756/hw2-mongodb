@@ -1,0 +1,9 @@
+type: object
+required:
+  - code
+properties:
+  code:
+    description: Google oauth code
+    type: 'string'
+example:
+  code: 4/0AUJR-x4jQ5V02B4SQiRn9jYwg8jBCTUv44efvTJbk0V8zxxBqprqv5q4APi45-z-ME6q8Q

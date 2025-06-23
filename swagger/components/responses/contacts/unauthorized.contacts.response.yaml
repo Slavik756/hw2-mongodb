@@ -1,0 +1,12 @@
+description: Unauthorized access - access token expired or session not found
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/contacts/errors/unauthorized.error.yaml
+    examples:
+      accessTokenExpired:
+        summary: Access token expired
+        $ref: ./examples/accessTokenExpired.contacts.example.yaml
+      sessionNotFound:
+        summary: Session not found
+        $ref: ./examples/sessionNotFound.contacts.example.yaml

@@ -1,0 +1,8 @@
+description: Send reset email
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/auth/success/confirmOAuth.success.yaml
+    examples:
+      confirmOAuth:
+        $ref: ./examples/confirmOAuth.auth.example.yaml

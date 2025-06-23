@@ -1,0 +1,9 @@
+description: Creates a contact
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/contacts/success/createContact.success.yaml
+    examples:
+      createContact:
+        summary: Create a contact
+        $ref: ./examples/createContact.contacts.example.yaml

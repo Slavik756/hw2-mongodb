@@ -1,0 +1,9 @@
+tags:
+  - Auth
+summary: Get oauth url
+operationId: getOAuthUrl
+description: Get google oauth url
+security: []
+responses:
+  '200':
+    $ref: ../../components/responses/auth/getOAuthUrl.auth.response.yaml

@@ -1,0 +1,16 @@
+tags:
+  - Auth
+summary: Reset password
+operationId: resetPwd
+description: Reset your password with JWT token
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: ../../components/schemas/auth/requestBody/resetPwd.requestBody.yaml
+responses:
+  '200':
+    $ref: ../../components/responses/auth/resetPwd.auth.response.yaml
+  '401':
+    $ref: ../../components/responses/auth/resetTokenExpiredOrInvalid.auth.response.yaml

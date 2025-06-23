@@ -1,0 +1,23 @@
+tags:
+  - Contacts
+summary: Patch contact
+operationId: patchContact
+description: 'Update a contact with payload'
+security:
+  - bearerAuth: []
+parameters:
+  - $ref: ../../../components/parameters/contacts/id.yaml
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        $ref: ../../../components/schemas/contacts/requestBody/patchContact.requestBody.yaml
+responses:
+  '200':
+    $ref: ../../../components/responses/contacts/patchContact.contacts.response.yaml
+  '400':
+    $ref: ../../../components/responses/contacts/bodyValidationErrorOrInvalidContactId.contacts.response.yaml
+  '401':
+    $ref: ../../../components/responses/contacts/unauthorized.contacts.response.yaml
+  '404':
+    $ref: ../../../components/responses/contacts/notFoundError.contacts.response.yaml

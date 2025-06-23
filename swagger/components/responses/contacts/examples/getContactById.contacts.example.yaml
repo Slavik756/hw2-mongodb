@@ -1,0 +1,14 @@
+value:
+  status: 200
+  message: Successfully found contact with id 684f6ec9a81f97b9fa6c65f1!
+  data:
+    _id: 685479239262ba2385e6666a
+    name: 'Tokio_Touka'
+    phoneNumber: '+380951000993'
+    email: 'touka@gmail.com'
+    isFavourite: true
+    contactType: 'work'
+    userId: 684f6e85a81f97b9fa6c65e9
+    photo: https://res.cloudinary.com/dz38jybtu/image/upload/v1750366499/projects/node-js-mongodb/contacts/avatars/blonde-blue-eye_1920x1080_1750366497421-881516606.jpg
+    createdAt: '2025-06-19T20:54:59.177Z'
+    updatedAt: '2025-06-19T20:54:59.177Z'

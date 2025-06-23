@@ -1,0 +1,18 @@
+tags:
+  - Contacts
+summary: Get list of contacts
+operationId: getContacts
+description: 'Get list of contacts with this endpoint'
+security:
+  - bearerAuth: []
+parameters:
+  - $ref: ../../components/parameters/contacts/page.yaml
+  - $ref: ../../components/parameters/contacts/perPage.yaml
+  - $ref: ../../components/parameters/contacts/sortBy.yaml
+  - $ref: ../../components/parameters/contacts/sortOrder.yaml
+  - $ref: ../../components/parameters/contacts/isFavourite.yaml
+responses:
+  '200':
+    $ref: ../../components/responses/contacts/getContacts.contacts.response.yaml
+  '401':
+    $ref: ../../components/responses/contacts/unauthorized.contacts.response.yaml
