@@ -26,13 +26,8 @@ export const startServer = () => {
   app.use(corsMiddleware);
 
   app.use(loggerMiddleware);
-
-  // Тестовий маршрут
-  // app.get('/hello', (req, res) => {
-  //   req.log.info({ route: '/hello' }, `The user went to the route '/hello'`);
-  //   res.send('Привіт!');
-  // });
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
   app.use(
     '/uploads/avatars',
     express.static(path.resolve('uploads', 'avatars')),
