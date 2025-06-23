@@ -1,3 +1,5 @@
+// import createHttpError from 'http-errors';
+
 import { ContactsCollection } from '../db/models/contact.js';
 
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
@@ -27,7 +29,9 @@ export const getContacts = async ({
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const [contactsCount, contacts] = await Promise.all([
-    ContactsCollection.find({ userId }).merge(contactsQuery).countDocuments(),
+    ContactsCollection.find({ userId })
+      .merge(contactsQuery)
+      .countDocuments(),
     contactsQuery
       .skip(skip)
       .limit(limit)
@@ -35,7 +39,11 @@ export const getContacts = async ({
       .exec(),
   ]);
 
-  const paginationData = calculatePaginationData(contactsCount, perPage, page);
+  const paginationData = calculatePaginationData(
+    contactsCount,
+    perPage,
+    page,
+  );
 
   return {
     data: contacts,
@@ -43,21 +51,18 @@ export const getContacts = async ({
   };
 };
 
-export const getContactById = async ({ contactId, userId }) => {
-  const contact = await ContactsCollection.findOne({ _id: contactId, userId });
+export const getContactById = async (payload) => {
+  const contact = await ContactsCollection.findOne(payload);
   return contact;
 };
 
-export const createContact = async ({ payload, userId }) => {
-  const student = await ContactsCollection.create({ ...payload, userId });
+export const createContact = async (payload) => {
+  const student = await ContactsCollection.create(payload);
   return student;
 };
 
-export const deleteContact = async ({ contactId, userId }) => {
-  const contact = await ContactsCollection.findOneAndDelete({
-    _id: contactId,
-    userId,
-  });
+export const deleteContact = async (payload) => {
+  const contact = await ContactsCollection.findOneAndDelete(payload);
   return contact;
 };
 
@@ -76,6 +81,5 @@ export const updateContact = async (
   return {
     contact: rawResult.value,
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
-    // isNew: Boolean(!rawResult?.lastErrorObject?.updatedExisting),
   };
 };
