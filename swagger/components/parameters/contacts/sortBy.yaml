@@ -1,9 +1,0 @@
-in: query
-name: sortBy
-schema:
-  type: string
-  enum: ['_id', 'name', 'isFavourite', 'createdAt', 'updatedAt']
-  example: 'name'
-  description: "All student's fields can be mentioned. Default value - name"
-
-required: false

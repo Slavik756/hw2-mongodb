@@ -1,5 +1,0 @@
-value:
-  status: 404
-  message: NotFoundError
-  data:
-    message: User not found

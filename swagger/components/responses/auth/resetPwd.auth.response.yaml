@@ -1,8 +1,0 @@
-description: Send reset email
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/success/resetPwd.success.yaml
-    examples:
-      sendResetEmail:
-        $ref: ./examples/resetPwd.auth.example.yaml

@@ -1,9 +1,0 @@
-description: Not found error
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/contacts/errors/badRequest.error.yaml
-    examples:
-      notFoundError:
-        summary: Contact not found
-        $ref: ./examples/notFoundError.contacts.example.yaml

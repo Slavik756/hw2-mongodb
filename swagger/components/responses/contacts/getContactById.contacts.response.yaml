@@ -1,9 +1,0 @@
-description: Successfully found contact by ID
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/contacts/success/getContactById.success.yaml
-    examples:
-      success:
-        summary: Found contact by ID
-        $ref: ./examples/getContactById.contacts.example.yaml

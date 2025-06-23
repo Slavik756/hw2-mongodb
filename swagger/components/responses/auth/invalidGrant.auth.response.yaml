@@ -1,8 +1,0 @@
-description: Internal Server Error - invalid_grant
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/errors/invalidGrant.error.yaml
-    examples:
-      invalidGrant:
-        $ref: ./examples/invalidGrant.auth.example.yaml

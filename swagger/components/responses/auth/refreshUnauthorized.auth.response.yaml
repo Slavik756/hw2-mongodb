@@ -1,8 +1,0 @@
-description: Refresh unauthorized
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/auth/errors/refreshUnauthorized.error.yaml
-    examples:
-      refresh:
-        $ref: ./examples/refreshUnauthorized.auth.example.yaml

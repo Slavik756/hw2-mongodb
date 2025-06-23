@@ -1,5 +1,0 @@
-value:
-  status: 401
-  message: UnauthorizedError
-  data:
-    message: Access token expired
