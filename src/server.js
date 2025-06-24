@@ -12,7 +12,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 import path from 'node:path';
-import { swaggerDocs } from './middlewares/swaggerDocs.js';
+import { serveSwagger, setupSwagger } from './middlewares/swaggerDocs.js';
 
 const PORT = getEnvVar('PORT', 8080);
 
@@ -28,7 +28,7 @@ export const startServer = () => {
     express.static(path.resolve('uploads', 'avatars')),
   );
 
-  app.use('/api-docs', ...swaggerDocs());
+ app.use('/api-docs', serveSwagger, setupSwagger);
 
   app.use(routes);
 
