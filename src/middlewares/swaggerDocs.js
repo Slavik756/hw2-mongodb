@@ -1,8 +1,7 @@
 import createHttpError from 'http-errors';
 import swaggerUI from 'swagger-ui-express';
-import fs from 'node:fs';
+import fs from 'fs';
 import { SWAGGER_PATH } from '../constants/index.js';
-
 
 let swaggerDoc;
 
@@ -10,7 +9,7 @@ try {
   const data = fs.readFileSync(SWAGGER_PATH, 'utf-8');
   swaggerDoc = JSON.parse(data);
 } catch (err) {
-  console.error("❌ Не вдалося завантажити swagger.json:", err.message);
+  console.error('❌ Swagger JSON load error:', err.message);
   swaggerDoc = null;
 }
 
